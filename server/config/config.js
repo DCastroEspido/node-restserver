@@ -16,7 +16,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'DEV';
 // 60 minutos
 // 24 horas
 // 30 días
-process.env.TOKEN_EXPIRATION_TIME = 60 * 60 * 24 * 30
+process.env.TOKEN_EXPIRATION_TIME = "48h"
 
 // ====================
 // Seed de autenticación JWT
