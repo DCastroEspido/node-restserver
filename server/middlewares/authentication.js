@@ -10,14 +10,15 @@ let verifyToken = (req, res, next) => {
         if (err) {
             return res.status(401).json({
                 ok: false,
-                err
+                err: {
+                    message: 'Token not valid'
+                }
             })
         }
 
         req.user = decoded.user;
         next();
     });
-
 };
 
 // ====================
@@ -34,11 +35,32 @@ let verifyAdminRole = (req, res, next) => {
             err: 'Unauthorized'
         })
     }
+};
 
+// ====================
+// Verificar Token Image
+// ====================
+let verifyTokenImg = (req, res, next) => {
+    let token = req.query.token;
+
+    jwt.verify(token, process.env.JWT_SEED, (err, decoded) => {
+        if (err) {
+            return res.status(401).json({
+                ok: false,
+                err: {
+                    message: 'Token not valid'
+                }
+            })
+        }
+
+        req.user = decoded.user;
+        next();
+    });
 };
 
 
 module.exports = {
     verifyToken,
-    verifyAdminRole
+    verifyAdminRole,
+    verifyTokenImg
 }
